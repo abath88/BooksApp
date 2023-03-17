@@ -110,11 +110,10 @@
       const thisBookList = this;
 
       for(let book of dataSource.books){
-        const genertedHTML = templates.book(book);
+        const ratingBgc = thisBookList.determineRatingBgc(book.rating);
+        const ratingWidth = book.rating * 10;
+        const genertedHTML = templates.book({...book, ratingBgc, ratingWidth});
         const element = utils.createDOMFromHTML(genertedHTML);
-        const rating = element.querySelector(select.book.rating);
-        rating.style.width = `${book.rating * 10}%`;
-        rating.style.background = thisBookList.determineRatingBgc(book.rating);
         thisBookList.dom.booksContainer.appendChild(element);
       }
     }
